@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="MavenServices">
+    <service-url>http://oss.sonatype.org/service/local/</service-url>
+    <service-url>http://repo.jfrog.org/artifactory/api/</service-url>
+    <service-url>http://repository.jboss.org/nexus/service/local/</service-url>
+    <service-url>http://jcenter.bintray.com</service-url>
+  </component>
+</project>

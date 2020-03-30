@@ -1,0 +1,8 @@
+<resources>
+    <string name="app_name">ProxSe</string>
+    <string name="button_text">Start/Stop</string>
+    <string name="notification_title">ProxSe App</string>
+    <string name="notification_message">Go Back to Stop</string>
+    <string name="ticker_text">It\'s Running ...</string>
+    <string name="quit_text">Exit</string>
+</resources>
