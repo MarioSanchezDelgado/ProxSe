@@ -1,4 +1,5 @@
 package com.mlsd.proxse;
+import android.net.wifi.WifiManager;
 import android.os.RemoteException;
 import android.util.Log;
 
@@ -365,7 +366,11 @@ public class ProxyServer extends Thread {
             int newport = serverSocket.getLocalPort();
             InetAddress mInetAddress = serverSocket.getInetAddress();
 
-            Log.d(TAG, "queport: " + newport);
+
+            Log.d(TAG, "queport: " + newport + " " + mIsRunning);
+            Log.d(TAG, "1: " + serverSocket.getLocalSocketAddress().toString());
+            //Log.d(TAG, "1: " + serverSocket.getLocalSocketAddress().toString());
+
             setPort( mInetAddress.getHostAddress(), newport);
 
             while (mIsRunning) {
@@ -373,10 +378,9 @@ public class ProxyServer extends Thread {
                     clientSocket = serverSocket.accept();
                     // Only receive local connections.
                     //if (socket.getInetAddress().isLoopbackAddress()) {
+                    Log.d(TAG, "Conecto clientsocket?");
                     if (clientSocket != null) {
                         Log.d(TAG, "Connected to: " + clientSocket.getInetAddress().getHostAddress());
-                        mInetAddress = serverSocket.getInetAddress();
-                        setPort( mInetAddress.getHostAddress(), newport);
                         //int timeout = clientSocket.getSoTimeout();
                         //Log.d(TAG, "Por entrar a proxy connection" + timeout);
                         ProxyConnection parser = new ProxyConnection(clientSocket);
@@ -384,7 +388,7 @@ public class ProxyServer extends Thread {
                         threadExecutor.execute(parser);
                         //Log.d(TAG, "Ejecuto parser");
                     } else {
-                        //Log.d(TAG, "se te cae el socketxx");
+                        Log.d(TAG, "No contecto");
                         clientSocket.close();
                     }
                 } catch (IOException e) {
@@ -404,6 +408,7 @@ public class ProxyServer extends Thread {
     public synchronized void setPort(String ipAddress, int port) {
         if (mCallback != null) {
             try {
+                Log.d(TAG, "Reporting " + ipAddress.toString() + " | " + port);
                 mCallback.setProxyData(ipAddress, port);
             } catch (RemoteException e) {
                 Log.w(TAG, "Proxy failed to report port to PacManager", e);
@@ -425,6 +430,7 @@ public class ProxyServer extends Thread {
     }
 
     public synchronized void startServer() {
+        Log.d(TAG, "startServer");
         mIsRunning = true;
         start();
     }
@@ -433,6 +439,7 @@ public class ProxyServer extends Thread {
         mIsRunning = false;
         if (clientSocket != null) {
             try {
+                Log.w(TAG, "Intentando cerrar client socket");
                 clientSocket.close();
                 clientSocket = null;
             } catch (IOException e) {
@@ -441,6 +448,7 @@ public class ProxyServer extends Thread {
         }
         if (serverSocket != null) {
             try {
+                Log.w(TAG, "Intentando cerrar socket");
                 serverSocket.close();
                 serverSocket = null;
             } catch (IOException e) {

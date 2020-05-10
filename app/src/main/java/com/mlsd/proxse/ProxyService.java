@@ -37,10 +37,10 @@ public class ProxyService extends Service {
     @Override
     public void onCreate() {
         super.onCreate();
-        if (server == null) {
+        /*if (server == null) {
             server = new ProxyServer();
             server.startServer();
-        }
+        }*/
     }
 
     @Override

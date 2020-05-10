@@ -3,12 +3,12 @@
 buildscript {
     
     repositories {
-        maven { url "C:/Users/Usuario/Documents/AndroidProjects/GradleFiles"}
+        //maven { url "C:/Users/Usuario/Documents/AndroidProjects/GradleFiles"}
         google()
-        //mavenCentral()
+        mavenCentral()
         //google()
-        //jcenter()
-        //maven { url "http://jcenter.bintray.com"}
+        jcenter()
+        maven { url "http://jcenter.bintray.com"}
         maven { url 'http://repo1.maven.org/maven2' }
     }
     dependencies {
@@ -22,12 +22,12 @@ buildscript {
 
 allprojects {
     repositories {
-        maven { url "C:/Users/Usuario/Documents/AndroidProjects/GradleFiles"}
+        //maven { url "C:/Users/Usuario/Documents/AndroidProjects/GradleFiles"}
         google()
-        //mavenCentral()
+        mavenCentral()
         //google()
-        //jcenter()
-        //maven { url "http://jcenter.bintray.com"}
+        jcenter()
+        maven { url "http://jcenter.bintray.com"}
         maven { url 'http://repo1.maven.org/maven2' }
     }
 }
